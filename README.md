@@ -10,5 +10,5 @@ Usage only from command line. Once mtpmount executable is in a %PATH% directory,
 - mtpmount unmount #x: Unmount it again once you are done.
 
 In addition to that, you can also mount a storage by its name:
-- mtpmount mount <devicename> <storagename> (<driveletter>).
+- mtpmount mount devicename storagename (driveletter).
 Also, the letter of the virtual drive can be set as shown in the example. This makes things easier when used in a script.
