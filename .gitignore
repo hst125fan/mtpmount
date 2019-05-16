@@ -1,0 +1,37 @@
+# global .gitignore for mtp-2-drive repository
+
+# VS internal stuff
+/.vs
+
+# build fragments
+*.exe
+*.obj
+*.dll
+*.lib
+*.ilk
+*.pdb
+*.tlog
+*.log
+*.idb
+*.iobj
+*.ipdb
+
+# vcxproj-user-files (no)
+#*.vcxproj.user
+
+#generated code
+tests/all_test_headers.h
+
+#backup script
+backup_upload_winscp.txt
+
+#test-protocol
+tests/*/testprotocol
+tests/x64/*/testprotocol
+
+#dokan libary
+/dokansrc
+
+#gitinfo file
+/mtpmount/gitinfo.h
+

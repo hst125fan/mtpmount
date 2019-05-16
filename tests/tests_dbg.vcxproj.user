@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LocalDebuggerCommand>$(SolutionDir)\Debug\tests</LocalDebuggerCommand>
+    <LocalDebuggerCommandArguments>$(SolutionDir)\tests\Debug\testprotocol</LocalDebuggerCommandArguments>
+    <LocalDebuggerWorkingDirectory>$(SolutionDir)\tests</LocalDebuggerWorkingDirectory>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LocalDebuggerCommand>$(SolutionDir)\Release\tests</LocalDebuggerCommand>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <LocalDebuggerCommandArguments>$(SolutionDir)\tests\Release\testprotocol</LocalDebuggerCommandArguments>
+    <LocalDebuggerWorkingDirectory>$(SolutionDir)\tests</LocalDebuggerWorkingDirectory>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LocalDebuggerWorkingDirectory>$(SolutionDir)\tests</LocalDebuggerWorkingDirectory>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <LocalDebuggerCommandArguments>$(SolutionDir)\tests\x64\Release\testprotocol</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommand>$(SolutionDir)\x64\Release\tests</LocalDebuggerCommand>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LocalDebuggerCommand>$(SolutionDir)\x64\Debug\tests</LocalDebuggerCommand>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <LocalDebuggerCommandArguments>$(SolutionDir)\tests\x64\Debug\testprotocol</LocalDebuggerCommandArguments>
+    <LocalDebuggerWorkingDirectory>$(SolutionDir)\tests</LocalDebuggerWorkingDirectory>
+  </PropertyGroup>
+</Project>
