@@ -12,3 +12,5 @@ Usage only from command line. Once mtpmount executable is in a %PATH% directory,
 In addition to that, you can also mount a storage by its name:
 - mtpmount mount devicename storagename (driveletter).
 Also, the letter of the virtual drive can be set as shown in the example. This makes things easier when used in a script.
+
+You can also get a built and ready-to-use version here: https://drive.google.com/open?id=1zo_NVH9RH72TbfPdBy1ttL4ruPfnCVR3. Please mind that you'll still have to install Dokan for this to work.
