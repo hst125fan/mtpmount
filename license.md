@@ -14,4 +14,4 @@
 
             0. You just DO WHAT THE FUCK YOU WANT TO.
 
-The license does not apply to the test data (.mp3 files)
+The license does not apply to the test data (.mp3 files), these are downloaded from the YouTube audio library (but don't contain a license which requires attribution). Since I don't know the exact licensing terms of these files, see YouTube audio library for T&C's.
