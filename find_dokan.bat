@@ -7,6 +7,11 @@ set dokanlib=notfound
 for /d %%f in ("C:\Program Files\Dokan\Dokan Library-*") do (
 	set dokanlib=%%f
 )
+if "%dokanlib%"=="notfound" (
+	for /d %%f in ("C:\Program Files\Dokan\DokanLibrary-*") do (
+		set dokanlib=%%f
+	)
+) 
 if "%dokanlib%"=="notfound" exit /b 1
 xcopy /s /y "%dokanlib%\include\*" "%1"
 xcopy /s /y "%dokanlib%\lib\*" "%2"
