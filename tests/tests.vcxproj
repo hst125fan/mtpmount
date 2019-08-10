@@ -101,7 +101,7 @@
       <AdditionalIncludeDirectories>"$(SolutionDir)\_dokancollect\include\dokan"</AdditionalIncludeDirectories>
     </ClCompile>
     <PostBuildEvent>
-      <Command>$(TargetPath) $(Configuration)\testprotocol</Command>
+      <Command>$(TargetPath) $(Configuration)\testprotocol &amp;&amp; rmdir /q /s "$(SolutionDir)/_dokancollect"</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>run tests</Message>
@@ -135,7 +135,7 @@
       <AdditionalIncludeDirectories>"$(SolutionDir)\_dokancollect\include\dokan"</AdditionalIncludeDirectories>
     </ClCompile>
     <PostBuildEvent>
-      <Command>$(TargetPath) $(Platform)\$(Configuration)\testprotocol</Command>
+      <Command>$(TargetPath) $(Platform)\$(Configuration)\testprotocol &amp;&amp; rmdir /q /s "$(SolutionDir)/_dokancollect"</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>run tests</Message>
@@ -169,7 +169,7 @@
       <AdditionalLibraryDirectories>"$(SolutionDir)\_dokancollect\x86\lib";</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>$(TargetPath) $(Configuration)\testprotocol</Command>
+      <Command>$(TargetPath) $(Configuration)\testprotocol &amp;&amp; rmdir /q /s "$(SolutionDir)/_dokancollect"</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>run tests</Message>
@@ -199,7 +199,7 @@
       <AdditionalLibraryDirectories>"$(SolutionDir)\_dokancollect\lib";</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>$(TargetPath) $(Platform)\$(Configuration)\testprotocol</Command>
+      <Command>$(TargetPath) $(Platform)\$(Configuration)\testprotocol &amp;&amp; rmdir /q /s "$(SolutionDir)/_dokancollect"</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>run tests</Message>
