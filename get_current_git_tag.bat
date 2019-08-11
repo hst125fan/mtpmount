@@ -1,4 +1,7 @@
 @echo off
+IF "%APPVEYORISTAG%"=="true" goto APPVEYORTAG
+IF "%APPVEYORISTAG%"=="false" goto APPVEYORNOTAG
+
 set HEADCOMMIT=null
 FOR /F %%i IN (%CD%\.git\HEAD) DO ( 
 	set HEADCONTENT=%%i
@@ -20,3 +23,14 @@ for /F %%f in ('dir /b %CD%\.git\refs\tags\') do (
 	)
 )
 if %FOUND%==no echo untagged
+goto END
+
+:APPVEYORTAG
+echo %APPVEYORTAGNAME%
+goto END
+
+:APPVEYORNOTAG
+echo untagged
+goto END
+
+:END
