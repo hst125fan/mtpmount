@@ -1,6 +1,9 @@
 # mtpmount
 Mounts Media Transfer Protocol (MTP) devices as (removable) drives on Windows for access via command line.
 
+![AppVeyor](https://img.shields.io/appveyor/ci/hst125fan/mtpmount?label=CI%26CD&style=plastic&logo=appveyor)
+![License](https://img.shields.io/badge/license-WTFPL-brightgreen?style=plastic)
+
 Project is built using Visual Studio 2017. An Installation of Dokan is required for this program to run (https://dokan-dev.github.io/).
 
 Usage only from command line. Once mtpmount executable is in a %PATH% directory, these commands should do it:
