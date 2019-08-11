@@ -1,15 +1,20 @@
 @echo off
-SET TEMPFILENAME="%CD%\batch_current_commit_temp"
-call get_current_git_commit_hash > %TEMPFILENAME%
-FOR /F "eol=; tokens=1 delims=, " %%i in (%TEMPFILENAME%) do (
-	set HEADCOMMIT=%%i
+set HEADCOMMIT=null
+FOR /F %%i IN (%CD%\.git\HEAD) DO ( 
+	set HEADCONTENT=%%i
 )
-del batch_current_commit_temp
+IF "%HEADCONTENT%" == "ref:" (
+	FOR /F "eol=; tokens=2,3* delims=, " %%i in (%CD%\.git\HEAD) do set FILENAME=%%i
+	FOR /F %%k IN (%CD%\.git\%FILENAME%) DO ( set HEADCOMMIT=%%k )
+) ELSE (
+	set HEADCOMMIT=%HEADCONTENT%
+)
+
 set FOUND=no
-for /R %%f in (%CD%\.git\refs\tags\*) do (
-	for /F %%h in (%%f) do (
+for /F %%f in ('dir /b %CD%\.git\refs\tags\') do (
+	for /F %%h in (%CD%\.git\refs\tags\%%f) do (
 		if %HEADCOMMIT%==%%h  (
-			echo %%~nf
+			echo %%~nxf
 			set FOUND=yes
 		)
 	)
