@@ -1,24 +1,24 @@
 # mtpmount
 Mounts Media Transfer Protocol (MTP) devices as (removable) drives on Windows for access via command line.
 
-![AppVeyor](https://img.shields.io/appveyor/ci/hst125fan/mtpmount?label=CI%26CD&style=plastic&logo=appveyor)
-![License](https://img.shields.io/badge/license-WTFPL-brightgreen?style=plastic)
+[![AppVeyor](https://img.shields.io/appveyor/ci/hst125fan/mtpmount?label=CI%26CD&style=plastic&logo=appveyor)](https://ci.appveyor.com/project/hst125fan/mtpmount)
+[![License](https://img.shields.io/badge/license-WTFPL-brightgreen?style=plastic)](https://github.com/hst125fan/mtpmount/blob/master/license.md)
 
 Project is built using Visual Studio 2017. An Installation of Dokan is required for this program to run (https://dokan-dev.github.io/).
 
 Usage only from command line. Once mtpmount executable is in a %PATH% directory, these commands should do it:
 
-- mtpmount list available: This shows you the connected MTP devices/storages.
-- mtpmount mount #x: Mount a storage media as drive. x is an Index received from previous command.
-- mtpmount unmount #x: Unmount it again once you are done.
+- ```mtpmount list available```: This shows you the connected MTP devices/storages.
+- ```mtpmount mount #x```: Mount a storage media as drive. x is an Index received from previous command.
+- ```mtpmount unmount #x```: Unmount it again once you are done.
 
 In addition to that, you can also mount a storage by its name:
-- mtpmount mount devicename storagename (driveletter).
+- ```mtpmount mount devicename storagename (driveletter)```.
 Also, the letter of the virtual drive can be set as shown in the example. This makes things easier when used in a script.
 
 
 # Get binaries
-find them here: https://ci.appveyor.com/project/hst125fan/mtpmount/build/artifacts (there is one version for 32-bit systems and one for 64-bit systems. The 32-bit executable should also work on 64-bit systems, however.)
+find them here: https://github.com/hst125fan/mtpmount/releases/latest (there is one version for 32-bit systems and one for 64-bit systems. The 32-bit executable should also work on 64-bit systems, however.)
 
 You need to install Dokan (https://github.com/dokan-dev/dokany/releases/latest) before you use mtpmount.
 
