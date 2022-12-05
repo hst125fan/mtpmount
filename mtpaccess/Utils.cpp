@@ -17,11 +17,15 @@ FILETIME Utils::timeConvert(ULONGLONG deviceTime)
 	return ret;
 }
 
+class chs_codecvt : public std::codecvt_byname<wchar_t, char, std::mbstate_t> {
+public:
+	chs_codecvt() : codecvt_byname("chs") { }
+};
+
 std::string Utils::wstringToString(std::wstring& string_to_convert)
 {
 	//setup converter
-	using convert_type = std::codecvt_utf8<wchar_t>;
-	std::wstring_convert<convert_type, wchar_t> converter;
+	std::wstring_convert<chs_codecvt> converter;
 
 	//use converter (.to_bytes: wstr->str, .from_bytes: str->wstr)
 	std::string converted_str = converter.to_bytes(string_to_convert);
@@ -31,8 +35,7 @@ std::string Utils::wstringToString(std::wstring& string_to_convert)
 std::wstring Utils::stringToWstring(std::string& string_to_convert)
 {
 	//setup converter
-	using convert_type = std::codecvt_utf8<wchar_t>;
-	std::wstring_convert<convert_type, wchar_t> converter;
+	std::wstring_convert<chs_codecvt> converter;
 
 	//use converter (.to_bytes: wstr->str, .from_bytes: str->wstr)
 	std::wstring converted_str = converter.from_bytes(string_to_convert);
