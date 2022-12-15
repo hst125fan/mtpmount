@@ -17,29 +17,36 @@ FILETIME Utils::timeConvert(ULONGLONG deviceTime)
 	return ret;
 }
 
-class chs_codecvt : public std::codecvt_byname<wchar_t, char, std::mbstate_t> {
-public:
-	chs_codecvt() : codecvt_byname("chs") { }
-};
-
 std::string Utils::wstringToString(std::wstring& string_to_convert)
 {
-	//setup converter
-	std::wstring_convert<chs_codecvt> converter;
+	setlocale(LC_ALL, "");
 
-	//use converter (.to_bytes: wstr->str, .from_bytes: str->wstr)
-	std::string converted_str = converter.to_bytes(string_to_convert);
-	return converted_str;
+	std::size_t len;
+	const wchar_t* unconvert_str = &string_to_convert[0];
+	std::mbstate_t state = std::mbstate_t();
+	wcsrtombs_s(&len, nullptr, 0, &unconvert_str, 0, &state);
+	len++;	// including terminated '/0'
+
+	std::vector<char> converted_str(len);
+	wcsrtombs_s(nullptr, &converted_str[0], converted_str.size(), &unconvert_str, _TRUNCATE, &state);
+
+	return &converted_str[0];
 }
 
 std::wstring Utils::stringToWstring(std::string& string_to_convert)
 {
-	//setup converter
-	std::wstring_convert<chs_codecvt> converter;
+	setlocale(LC_ALL, "");
 
-	//use converter (.to_bytes: wstr->str, .from_bytes: str->wstr)
-	std::wstring converted_str = converter.from_bytes(string_to_convert);
-	return converted_str;
+	std::size_t len;
+	const char* unconvert_string = &string_to_convert[0];
+	std::mbstate_t state = std::mbstate_t();
+	mbsrtowcs_s(&len, nullptr, 0, &unconvert_string, 0, &state);
+	len++;	// including terminated '/0'
+
+	std::vector<wchar_t> converted_str(len);
+	mbsrtowcs_s(nullptr, &converted_str[0], converted_str.size(), &unconvert_string, _TRUNCATE, &state);
+
+	return &converted_str[0];
 }
 
 std::wstring Utils::getFileEnding(std::wstring& filename)
