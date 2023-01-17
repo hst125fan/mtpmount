@@ -12,7 +12,7 @@ class DokanDriveWrapper;
 
 void DokanDriveWrapperThreadRoutine(DokanDriveWrapper* d);
 
-NTSTATUS DOKAN_CALLBACK DokanMounted(PDOKAN_FILE_INFO fileinfo);
+NTSTATUS DOKAN_CALLBACK DokanMounted(LPCWSTR MountPoint, PDOKAN_FILE_INFO DokanFileInfo);
 NTSTATUS DOKAN_CALLBACK DokanCreateFile(LPCWSTR FileName, PDOKAN_IO_SECURITY_CONTEXT SecurityContext, ACCESS_MASK DesiredAccess, ULONG FileAttributes, ULONG ShareAccess, ULONG CreateDisposition, ULONG CreateOptions, PDOKAN_FILE_INFO DokanFileInfo);
 void DOKAN_CALLBACK DokanCleanup(LPCWSTR FileName, PDOKAN_FILE_INFO DokanFileInfo);
 NTSTATUS DOKAN_CALLBACK DokanFindFiles(LPCWSTR FileName, PFillFindData FillFindData, PDOKAN_FILE_INFO DokanFileInfo);
@@ -86,6 +86,7 @@ private:
 	FileCache* _myCache;
 	int _driveId;
 	std::thread* _myThread;
+	static int _wrapperCount;
 
 	enum MntSttts
 	{
@@ -110,7 +111,7 @@ private:
 	bool _isDirEmpty(const FsPath& dirpath);
 
 	friend void DokanDriveWrapperThreadRoutine(DokanDriveWrapper* d);
-	friend NTSTATUS DOKAN_CALLBACK DokanMounted(PDOKAN_FILE_INFO fileinfo);
+	friend NTSTATUS DOKAN_CALLBACK DokanMounted(LPCWSTR MountPoint, PDOKAN_FILE_INFO DokanFileInfo);
 	friend NTSTATUS DOKAN_CALLBACK DokanCreateFile(LPCWSTR FileName, PDOKAN_IO_SECURITY_CONTEXT SecurityContext, ACCESS_MASK DesiredAccess, ULONG FileAttributes, ULONG ShareAccess, ULONG CreateDisposition, ULONG CreateOptions, PDOKAN_FILE_INFO DokanFileInfo);
 	friend void DOKAN_CALLBACK DokanCleanup(LPCWSTR FileName, PDOKAN_FILE_INFO DokanFileInfo);
 	friend NTSTATUS DOKAN_CALLBACK DokanFindFiles(LPCWSTR FileName, PFillFindData FillFindData, PDOKAN_FILE_INFO DokanFileInfo);

@@ -14,15 +14,23 @@ bool isThisAWriteAccess(ACCESS_MASK DesiredAccess)
 	return false;
 }
 
+int DokanDriveWrapper::_wrapperCount = 0;
+
 DokanDriveWrapper::DokanDriveWrapper(ConnectionSync& connsyncer, FileCache& fcache,int driveID, char driveletter, const std::wstring& volumename) : _myConnection(&connsyncer), _myCache(&fcache), _driveId(driveID), _mountstatus(STATUS_UNKNOWN), _volumename(volumename)
 {
+	if (_wrapperCount == 0)
+	{
+		DokanInit();
+	}
+	_wrapperCount++;
+
 	memset(&dokanoptions, 0, sizeof(DOKAN_OPTIONS));
 	dokanoptions.GlobalContext = (ULONG64)this;
 	_dokanmntpnt.append(1, driveletter);
 	_dokanmntpnt.append(L":\\");
 	dokanoptions.MountPoint = _dokanmntpnt.c_str();
 	dokanoptions.Options = DOKAN_OPTION_CURRENT_SESSION | DOKAN_OPTION_REMOVABLE;
-	dokanoptions.Version = 120;
+	dokanoptions.Version = 200;
 
 	memset(&dokanoperations, 0, sizeof(DOKAN_OPERATIONS));
 	dokanoperations.Mounted = DokanMounted;
@@ -85,6 +93,12 @@ DokanDriveWrapper::~DokanDriveWrapper()
 	_mountstatusMutex.unlock();
 	_myThread->join();
 	delete _myThread;
+
+	_wrapperCount--;
+	if (_wrapperCount == 0)
+	{
+		DokanShutdown();
+	}
 }
 
 char DokanDriveWrapper::getDriveLetter()
@@ -181,7 +195,8 @@ void DokanDriveWrapperThreadRoutine(DokanDriveWrapper* d)
 }
 
 
-NTSTATUS DOKAN_CALLBACK DokanMounted(PDOKAN_FILE_INFO DokanFileInfo)
+NTSTATUS DOKAN_CALLBACK DokanMounted(LPCWSTR MountPoint, PDOKAN_FILE_INFO DokanFileInfo)
+
 {
 	DokanDriveWrapper* d = (DokanDriveWrapper*)DokanFileInfo->DokanOptions->GlobalContext;
 	d->_mountstatusMutex.lock();
